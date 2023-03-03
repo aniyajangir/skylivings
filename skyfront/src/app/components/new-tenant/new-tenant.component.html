@@ -1,0 +1,165 @@
+<div class="card container mt-5 mb-5">
+  <h5 class="card-header" style="text-align: center; padding: 10px; margin-top: 10px">
+    Personal Details
+  </h5>
+  <form (ngSubmit)="onSubmit()">
+    <div class="row mt-3">
+      <div class="col">
+        <label for="firstName">First Name <span class="span">*</span></label>
+        <input type="text" class="form-control" id="firstName" placeholder="First Name" [(ngModel)]="tenant.firstName"
+          name="firstName" required />
+      </div>
+      <div class="col">
+        <label for="lastName">Last Name <span class="span">*</span></label>
+        <input type="text" class="form-control" id="lastName" placeholder="Last Name" [(ngModel)]="tenant.lastName"
+          name="lastName" required />
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <!-- first column -->
+      <div class="col-md-6">
+        <label for="gender">Gender <span class="span">*</span></label>
+        <div class="row" style="margin-left: 1px">
+            <div class="form-check col-md-2 form-check-inline">
+                <input class="form-check-input" type="radio" id="MALE" name="gender" value="MALE" [(ngModel)]="tenant.gender">
+                <label  class="form-check-label" for="MALE">MALE</label><br>
+            </div>
+            <div class="form-check col-md-2 form-check-inline">
+                <input class="form-check-input" type="radio" id="FEMALE" name="gender" value="FEMALE" [(ngModel)]="tenant.gender">
+                <label  class="form-check-label" for="FEMALE">FEMALE</label><br>
+            </div>
+
+            <div class="form-check col-md-2 form-check-inline">
+                <input class="form-check-input" type="radio" id="OTHER" name="gender" value="OTHER" [(ngModel)]="tenant.gender">
+                <label  class="form-check-label" for="OTHER">OTHER</label><br>
+            </div>
+        </div>
+    </div>
+
+      <!-- second column -->
+      <div class="col-md-6">
+        <label for="inputEmail4">Email <span class="span">*</span></label>
+        <input type="email" class="form-control" id="inputEmail4" placeholder="Email"
+          pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" [(ngModel)]="tenant.email" name="email" required />
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col">
+        <label for="contact">Contact <span class="span">*</span></label>
+        <input type="text" class="form-control" id="contact" placeholder="Contact" [(ngModel)]="tenant.contact"
+          name="contact" required minlength="10" maxlength="15" />
+      </div>
+
+      <div class="col">
+        <label for="alternativeContact">Alternative Contact</label>
+        <input type="text" class="form-control" id="alternativeContact" placeholder="Alternative Contact"
+          [(ngModel)]="tenant.alternativeContact" name="alternativeContact" />
+      </div>
+    </div>
+
+    <h5>
+      <div class="card-header" style="text-align: center; margin-top: 30px">
+        Address
+      </div>
+    </h5>
+    <div class="row mt-3">
+      <div class="col">
+        <label for="flatNumber">Building Name</label>
+        <input type="text" class="form-control" id="flatNumber" placeholder="1234 Main St"
+          [(ngModel)]="tenant.flatNumber" name="flatNumber" />
+      </div>
+      <div class="col">
+        <label for="streetName">Street Name</label>
+        <input type="text" class="form-control" id="streetName" placeholder="Apartment, studio, or floor"
+          [(ngModel)]="tenant.streetName" name="streetName" />
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="form-group col-md-4">
+        <label for="city">City <span class="span">*</span></label>
+        <input type="text" class="form-control" id="city" [(ngModel)]="tenant.city" name="city" required />
+      </div>
+      <div class="form-group col-md-2">
+        <label for="state">State <span class="span">*</span></label>
+        <input type="text" class="form-control" id="state" placeholder="State" [(ngModel)]="tenant.state" name="state"
+          required />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="country">Country <span class="span">*</span></label>
+        <input type="text" class="form-control" id="country" [(ngModel)]="tenant.country" name="country" required />
+      </div>
+
+      <div class="form-group col-md-2">
+        <label for="inputZip">Zip <span class="span">*</span></label>
+        <input type="text" class="form-control" id="inputZip" [(ngModel)]="tenant.zip" name="zip" required />
+      </div>
+    </div>
+    <!-- <div class="form-group mt-3">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck" />
+        <label class="form-check-label" for="gridCheck"> Check me out </label>
+      </div>
+    </div> -->
+
+    <h5>
+      <div class="card-header" style="text-align: center; margin-top: 30px">
+        Stay Details
+      </div>
+    </h5>
+    <div class="row mt-3">
+      <div class="col">
+        <label for="propertyName">Property Name <span class="span">*</span></label>
+        <select id="propertyName" name="property" [(ngModel)]="tenant.property" class="form-control">
+            <option *ngFor="let property of properties" [ngValue]="property">
+                {{ property.propertyCode + " " + property.propertyName }}
+            </option>
+        </select>
+      </div>
+      <div class="col">
+        <label for="checkInDate">Check in Date<span class="span">*</span></label>
+        <input type="date" class="form-control" id="checkInDate" placeholder="Check In Date"
+          [(ngModel)]="tenant.checkInDate" name="checkInDate" />
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-md-3">
+        <label for="buildingName">Room Number<span class="span">*</span></label>
+        <select id="buildingName" class="form-control">
+          <option selected>Choose...</option>
+          <option>A-1</option>
+          <option>B-1</option>
+          <option>C-1</option>
+          <option>D-1</option>
+          required
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label for="intendedStay">Intended Stay</label>
+        <input type="text" class="form-control" id="intendedStay" placeholder="Intended Stay" />
+      </div>
+
+      <div class="col-md-3">
+        <label for="headRoomMate">Head Roommate<span class="span">*</span></label>
+        <select id="headRoomMate" class="form-control">
+          <option selected>Choose...</option>
+          <option>YES</option>
+          <option>NO</option>
+          required
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label for="roomRent">Monthly Rent <span class="span">*</span></label>
+        <input type="number" class="form-control" id="roomRent" placeholder="Room Rent" [(ngModel)]="tenant.rent"
+          name="rent" required />
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3" style="text-align: center; width: 100%; margin-bottom: 10px">
+      Register
+    </button>
+  </form>
+</div>

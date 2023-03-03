@@ -1,0 +1,105 @@
+<div class="card container mt-5 mb-5">
+    <h5 class="card-header" style="text-align: center; padding: 10px; margin-top: 10px">
+        Personal Details
+    </h5>
+    <form (ngSubmit)="onSubmit()">
+        <div class="row mt-3">
+            <div class="col">
+                <label for="firstName">First Name <span class="span">*</span></label>
+                <input type="text" class="form-control" id="firstName" placeholder="First Name" name="firstName"
+                    [(ngModel)]="manager.firstName" required />
+            </div>
+            <div class="col">
+                <label for="lastName">Last Name <span class="span">*</span></label>
+                <input type="text" class="form-control" id="lastName" placeholder="Last Name" name="lastName"
+                    [(ngModel)]="manager.lastName" required />
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <!-- first column -->
+            <div class="col-md-6">
+                <label for="gender">Gender <span class="span">*</span></label>
+                <div class="row" style="margin-left: 1px">
+                    <div class="form-check col-md-2 form-check-inline">
+                        <input class="form-check-input" type="radio" id="MALE" name="gender" value="MALE" [(ngModel)]="manager.gender">
+                        <label  class="form-check-label" for="MALE">MALE</label><br>
+                    </div>
+                    <div class="form-check col-md-2 form-check-inline">
+                        <input class="form-check-input" type="radio" id="FEMALE" name="gender" value="FEMALE" [(ngModel)]="manager.gender">
+                        <label  class="form-check-label" for="FEMALE">FEMALE</label><br>
+                    </div>
+
+                    <div class="form-check col-md-2 form-check-inline">
+                        <input class="form-check-input" type="radio" id="OTHER" name="gender" value="OTHER" [(ngModel)]="manager.gender">
+                        <label  class="form-check-label" for="OTHER">OTHER</label><br>
+                    </div>
+                </div>
+            </div>
+
+            <!-- second column -->
+            <div class="col-md-6">
+                <label for="inputEmail4">Email <span class="span">*</span></label>
+                <input type="email" class="form-control" id="inputEmail4" placeholder="Email"
+                    pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" name="email" [(ngModel)]="manager.email" required />
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col">
+                <label for="contact">Contact <span class="span">*</span></label>
+                <input type="text" class="form-control" id="contact" placeholder="Contact" name="contact" required
+                    [(ngModel)]="manager.contact" minlength="10" maxlength="15" />
+            </div>
+
+            <div class="col">
+                <label for="alternativeContact">Alternative Contact</label>
+                <input type="text" class="form-control" id="alternativeContact" placeholder="Alternative Contact"
+                    [(ngModel)]="manager.alternativeContact" name="alternativeContact" />
+            </div>
+        </div>
+
+        <h5>
+            <div class="card-header" style="text-align: center; margin-top: 30px">
+                Address
+            </div>
+        </h5>
+        <div class="row mt-3">
+            <div class="col">
+                <label for="flatNumber">Building Name</label>
+                <input type="text" class="form-control" id="flatNumber" placeholder="1234 Main St" name="flatNumber"
+                    [(ngModel)]="manager.flatNumber" />
+            </div>
+            <div class="col">
+                <label for="streetName">Street Name</label>
+                <input type="text" class="form-control" id="streetName" placeholder="Apartment, studio, or floor"
+                    name="streetName" [(ngModel)]="manager.streetName" />
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="form-group col-md-4">
+                <label for="city">City <span class="span">*</span></label>
+                <input type="text" class="form-control" id="city" name="city" [(ngModel)]="manager.city" required />
+            </div>
+            <div class="form-group col-md-2">
+                <label for="state">State <span class="span">*</span></label>
+                <input type="text" class="form-control" id="state" placeholder="State" name="state"
+                    [(ngModel)]="manager.state" required />
+            </div>
+            <div class="form-group col-md-4">
+                <label for="country">Country <span class="span">*</span></label>
+                <input type="text" class="form-control" id="country" name="country" [(ngModel)]="manager.country"
+                    required />
+            </div>
+
+            <div class="form-group col-md-2">
+                <label for="inputZip">Zip <span class="span">*</span></label>
+                <input type="text" class="form-control" id="inputZip" name="zip" [(ngModel)]="manager.zip" required />
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3" style="text-align: center; width: 100%; margin-bottom: 10px">
+            Register
+        </button>
+    </form>
+</div>

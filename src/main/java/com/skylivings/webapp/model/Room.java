@@ -2,6 +2,7 @@ package com.skylivings.webapp.model;
 
 import java.util.List;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -20,12 +21,17 @@ import lombok.Data;
 public class Room {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long roomId;
+	private int roomId;
 	private String roomNumber;
 	@OneToMany
 	private List<Tenant> tenants;
 	private String desctiption;
 	private double rent;
+	private int numberOfBedrooms;
+	private int numberOrBathrooms;
+	private double deposit;
+	@ElementCollection
+	private List<String> amenities;
 	@Enumerated(EnumType.STRING)
 	private RoomStatus roomStatus;
 	@OneToOne
