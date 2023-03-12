@@ -8,6 +8,7 @@ import org.hibernate.sql.Template;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skylivings.webapp.dto.TenantCheckoutDTO;
 import com.skylivings.webapp.dto.TenantDTO;
 import com.skylivings.webapp.model.Address;
 import com.skylivings.webapp.model.Property;
@@ -15,12 +16,14 @@ import com.skylivings.webapp.model.PropertyManager;
 import com.skylivings.webapp.model.Role;
 import com.skylivings.webapp.model.Room;
 import com.skylivings.webapp.model.Tenant;
+import com.skylivings.webapp.model.TenantGovtDetails;
 import com.skylivings.webapp.model.User;
 import com.skylivings.webapp.model.enums.TenantStatus;
 import com.skylivings.webapp.repo.AddressRepo;
 import com.skylivings.webapp.repo.ManagerRepo;
 import com.skylivings.webapp.repo.PropertyRepo;
 import com.skylivings.webapp.repo.RoleRepo;
+import com.skylivings.webapp.repo.RoomRepo;
 import com.skylivings.webapp.repo.TenantRepo;
 import com.skylivings.webapp.repo.UserRepo;
 
@@ -43,6 +46,9 @@ public class TenantService {
 	
 	@Autowired
 	PropertyRepo propertyRepo;
+	
+	@Autowired
+	RoomRepo roomRepo;
 
 	public Tenant addNewTenant(Tenant tenant) {
 		return tenantRepo.save(tenant);
@@ -52,23 +58,35 @@ public class TenantService {
 		return tenantRepo.findAll();
 	}
 
-	public List<TenantDTO> getTenantPersonalDetails() {
-		return ((List<Tenant>) tenantRepo.findAll()).stream().map(this::convertTenantToDTO)
-				.collect(Collectors.toList());
+	public List<Tenant> getTenantPersonalDetails() {
+		return tenantRepo.findAll();
+//				.stream().map(this::convertTenantToDTO)
+//				.collect(Collectors.toList());
 	}
 
-	public TenantDTO convertTenantToDTO(Tenant tenant) {
-		TenantDTO tenantDTO = new TenantDTO();
-		tenantDTO.setId(tenant.getId());
-		tenantDTO.setFirstName(tenant.getFirstName());
-		tenantDTO.setLastName(tenant.getLastName());
-		tenantDTO.setContact(tenant.getContact());
-		tenantDTO.setEmail(tenant.getEmail());
-		tenantDTO.setGender(tenant.getGender());
-		tenantDTO.setHeadRoomMate(tenant.getHeadRoomMate());
-		tenantDTO.setAlternativeContact(tenant.getAlternativeContact());
-		return tenantDTO;
+	public List<Tenant> getActiveTenantList(){
+		return tenantRepo.getActiveTenantList();
 	}
+//	public TenantCheckoutDTO checkedOutTenantList(Tenant tenant) {
+//		TenantCheckoutDTO checkoutDTO = new TenantCheckoutDTO();
+//		checkoutDTO.setTenantId(tenant.getTenantId());
+//		checkoutDTO.setCheckOutDate(tenant.getCheckOutDate());
+//		Property property = propertyRepo.getById()
+//		Room room = roomRepo.getById();
+//		checkoutDTO.set
+//	}
+//	public TenantDTO convertTenantToDTO(Tenant tenant) {
+//		TenantDTO tenantDTO = new TenantDTO();
+//		tenantDTO.setId(tenant.getId());
+//		tenantDTO.setFirstName(tenant.getFirstName());
+//		tenantDTO.setLastName(tenant.getLastName());
+//		tenantDTO.setContact(tenant.getContact());
+//		tenantDTO.setEmail(tenant.getEmail());
+//		tenantDTO.setGender(tenant.getGender());
+//		tenantDTO.setHeadRoomMate(tenant.getHeadRoomMate());
+//		tenantDTO.setAlternativeContact(tenant.getAlternativeContact());
+//		return tenantDTO;
+//	}
 
 	public TenantDTO addTenant(TenantDTO tenantDTO) {
 		try {
@@ -81,6 +99,8 @@ public class TenantService {
 			tenant.setGender(tenantDTO.getGender());
 			tenant.setEmail(tenantDTO.getEmail());
 			tenant.setTenantStatus(TenantStatus.ACTIVE);
+			tenant.setCheckInDate(tenantDTO.getCheckInDate());
+			tenant.setHeadRoomMate(tenantDTO.getHeadRoomMate());
 
 			// New Tenant address
 			Address address = new Address();
@@ -91,6 +111,19 @@ public class TenantService {
 			address.setPincode(tenantDTO.getZip());
 			address.setState(tenantDTO.getState());
 
+			//Tenant Nationality Details
+			TenantGovtDetails govtDetails = new TenantGovtDetails();
+			govtDetails.setAadharNumber(tenantDTO.getAadharNumber());
+			govtDetails.setPanNumber(tenantDTO.getPanNumber());
+			govtDetails.setNationality(tenantDTO.getNationality());
+			govtDetails.setPassportNumber(tenantDTO.getPassportNumber());
+			govtDetails.setPassportExpiryDate(tenantDTO.getPassportExpiryDate());
+			govtDetails.setVisaExpiryDate(tenantDTO.getVisaExpiryDate());
+			govtDetails.setVisaNumber(tenantDTO.getVisaNumber());
+			govtDetails.setVisaType(tenantDTO.getVisaType());
+			
+			//Assigning details to tenant
+			tenant.setGovtDetails(govtDetails);
 			// Setting address for new tenant
 			tenant.setAddress(address);
 
@@ -108,10 +141,25 @@ public class TenantService {
 			user.setRole(role);
 			
 			tenant.setUser(user);
-
-			int id = tenantDTO.getProperty().getPropertyId();
-			Property property = propertyRepo.getById(id);
+			
+			Property property = propertyRepo.getById(tenantDTO.getPropertyId());
 			tenant.setProperty(property);
+			
+			List<Room> rooms = property.getRooms();
+			for(int i = 0; i<rooms.size(); i++) {
+				if(rooms.get(i).getRoomId() == tenantDTO.getRoomId()) {
+					tenant.setRoom(rooms.get(i));
+				}
+			}
+			
+//			int roomId = tenantDTO.getRoomId();
+//			List<Room> rooms = tenant.getProperty().getRooms();
+//
+//			for(int i = 0; i<rooms.size(); i++) {
+//				if(rooms.get(i).getRoomId() == roomId) {
+//					rooms.get(i).getTenants().add(tenant);
+//				}
+//			}
 			
 			tenantRepo.save(tenant);
 			return tenantDTO;
@@ -121,6 +169,39 @@ public class TenantService {
 			return tenantDTO;
 		}
 
+	}
+	
+	public List<Tenant> getRoomMatesList(int tenantId){
+		Tenant tenant = tenantRepo.getById(tenantId);
+		int roomId = tenant.getRoom().getRoomId();
+		List<Tenant> roomTenants = tenantRepo.getTenantByRoom(roomId);
+		System.out.println(roomTenants);
+		return roomTenants;
+	}
+	
+
+	public TenantDTO getTenantById(int tenantId) {
+		Tenant tenant = tenantRepo.getById(tenantId);
+		TenantDTO tenantDTO = new TenantDTO();
+		tenantDTO.setTeanantId(tenant.getTenantId());
+		tenantDTO.setFirstName(tenant.getFirstName());
+		tenantDTO.setLastName(tenant.getLastName());
+		tenantDTO.setContact(tenant.getContact());
+		tenantDTO.setEmail(tenant.getEmail());
+		tenantDTO.setGender(tenant.getGender());
+		tenantDTO.setHeadRoomMate(tenant.getHeadRoomMate());
+		tenantDTO.setAlternativeContact(tenant.getAlternativeContact());
+		tenantDTO.setPropertyName(tenant.getProperty().getPropertyName());
+		tenantDTO.setRoomNumber(tenant.getRoom().getRoomNumber());
+		tenantDTO.setDeposit(tenant.getRoom().getDeposit());
+		tenantDTO.setRoom(tenant.getRoom());
+		tenantDTO.setAddress(tenant.getAddress());
+		tenantDTO.setCheckInDate(tenant.getCheckInDate());
+		tenantDTO.setCheckOutDate(tenant.getCheckOutDate());
+		tenantDTO.setTenantStatus(tenant.getTenantStatus());
+		tenantDTO.setAadharNumber(tenant.getGovtDetails().getAadharNumber());
+		tenantDTO.setPanNumber(tenant.getGovtDetails().getPanNumber());
+		return tenantDTO;
 	}
 
 }

@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Manager } from '../classes/manager';
+import { Tenant } from '../classes/tenant';
 
 @Injectable({
   providedIn: 'root'
@@ -18,4 +19,9 @@ export class ManagerServiceService {
   createManager(manager: Manager):Observable<Object>{
     return this.httpClient.post(`${this.baseUrl}`+"manager", manager);
   }
+
+   checkoutTenant(tenant: any):Observable<Object>{                 
+    return this.httpClient.post(`${this.baseUrl}`+"checkout-tenant", tenant);
+  }
+
 }

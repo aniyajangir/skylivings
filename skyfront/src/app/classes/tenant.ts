@@ -1,14 +1,16 @@
+import { Address } from "./address";
 import { Property } from "./property";
+import { Room } from "./room";
 
 export class Tenant {
-  id!: number;
+  tenantId!: number;
   firstName!: string;
   lastName!: string;
   contact!: string;
   alternativeContact!: string;
   email!: string;
   gender!: string;
-  headRoomMate!: boolean;
+  headRoomMate!: string;
   flatNumber!: string;
   streetName!: string;
   city !: string;
@@ -18,7 +20,21 @@ export class Tenant {
   zip !: number;
   propertyName !: string;
   checkInDate !: Date;
+  checkOutDate !: Date;
   roomNumber !: number;
   rent !: number;
+  deposit!: number;
   property!: Property;
+  tenantStatus!: string;
+  address!: Address;
+  room!:Room;
+  aadharNumber!: string;
+  panNumber!: string;
+  passportNumber!: string;
+  passportExpiryDate!: Date;
+  visaNumber!: string;
+  visaExpiryDate!: Date;
+  visaType!: string;
+  nationality!: string;
+  
 }

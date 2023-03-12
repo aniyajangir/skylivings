@@ -33,7 +33,7 @@ export class NewManagerComponent implements OnInit {
   }
 
   goToManagerList(){
-    this.router.navigate(["/property-tenants"]);
+    this.router.navigate(["/manager-list"]);
   }
 
 }

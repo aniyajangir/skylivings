@@ -1,54 +1,60 @@
-<h5 style="text-align:center;">
-    Add Property Details 
-</h5>
+<h5 style="text-align: center">Add Property Details</h5>
 <div class="container card mt-3">
     <div class="card-header mt-3">
-        <h5 style="text-align: center;">
-            Room / Flat
-        </h5>
+        <h5 style="text-align: center">Room / Flat</h5>
     </div>
-    <form action="post">
+    <form action="post" [formGroup]="roomForm" (ngSubmit)="onSumbit()">
         <div class="row mt-3">
             <div class="col-md-6">
                 <label for="roomType">Type</label>
-                <input type="text" class="form-control" placeholder="Property Type">
-            </div> 
+                <input type="text" class="form-control" placeholder="Property Type" formControlName="propertyType"/>
+            </div>
             <div class="col">
                 <label for="roomNumber">Room Number</label>
-                <input type="text" class="form-control" placeholder="Room / Flat Number">
+                <input type="text" class="form-control" placeholder="Room / Flat Number" formControlName="roomNumber"/>
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-md-3">
-                <label for="numberOfRoom">Quantity</label>
-                <input type="number" class="form-control" placeholder="Number of Rooms">
-            </div> 
-            <div class="col-md-3">
                 <label for="roomNumber">Size (SqFt.)</label>
-                <input type="number" class="form-control" placeholder="Size of Room/Flat">
+                <input type="number" class="form-control" placeholder="Size of Room/Flat"  formControlName="roomSize"/>
+            </div>
+            <div class="col-md-3">
+                <label for="maxTenant">Capacity</label>
+                <input type="number" class="form-control" placeholder="Max Tenant Allowed" formControlName="capacity"/>
             </div>
             <div class="col-md-3">
                 <label for="bedroooms">Bedrooms</label>
-                <input type="number" class="form-control" placeholder="Number of Bedrooms">
+                <input type="number" class="form-control" placeholder="Number of Bedrooms"  formControlName="bedrooms"/>
             </div>
             <div class="col-md-3">
                 <label for="bathrooms">Bathrooms</label>
-                <input type="number" class="form-control" placeholder="Number of Bathrooms">
+                <input type="number" class="form-control" placeholder="Number of Bathrooms" formControlName="bathrooms"/>
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-md-3">
                 <label for="rent">Rent</label>
-                <input type="number" class="form-control" placeholder="Rent Per Month">
+                <input type="number" class="form-control" placeholder="Rent Per Month" formControlName="rent" />
             </div>
             <div class="col-md-3">
                 <label for="deposit">Deposit</label>
-                <input type="number" class="form-control" placeholder="Security Deposit">
+                <input type="number" class="form-control" placeholder="Security Deposit" formControlName="deposit" />
+            </div>
+            <div class="col-md-6">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" placeholder="Description" formControlName="description"/>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary mt-3" style="text-align: center; width: 100%; margin-bottom: 10px">
-            Register 
-        </button>
+
+        <div class="row mt-3">
+            <div class="col-md-3 mt-2">
+                <button type="submit" class="btn btn-primary mt-3" style="text-align: center; margin-bottom: 10px">
+                    Register
+                </button>
+            </div>
+        </div>
+        <div class="row mt-3">
+        </div>
     </form>
-    
 </div>

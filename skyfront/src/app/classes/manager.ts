@@ -1,7 +1,7 @@
 import { Gender } from "./gender";
 
 export class Manager {
-  id!: number;
+  managerId!: number;
   firstName!: string;
   lastName!: string;
   contact!: string;

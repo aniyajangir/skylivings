@@ -1,0 +1,46 @@
+<div class="container card mt-3">
+    <div class="card-header" style="text-align: center; padding: 10px; margin-top: 10px">
+        <h5>Check Out Tenant</h5>
+    </div>
+   <form [formGroup]="checkoutTenantForm" (ngSubmit)="onSubmit()">
+    <div class="row mt-3">
+        <div class="col">
+          <label for="propertyName">Property Name <span class="span">*</span></label> 
+          <select id="propertyName" formControlName="propertyId"  class="form-control">
+              <option *ngFor="let property of properties" [value]="property.propertyId" > 
+                  {{ property.propertyCode + " " + property.propertyName}}
+              </option>
+          </select>
+        </div>
+        <div class="col">
+          <label for="checkInDate">Checkout Date<span class="span">*</span></label>
+          <input type="date" class="form-control" id="checkInDate" placeholder="Check In Date"
+             formControlName="checkOutDate" />
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-3">
+          <label for="buildingName">Room Number<span class="span">*</span></label>
+          <select id="buildingName" class="form-control" formControlName="roomId">
+            <option *ngFor="let room of propertyRooms" [value]="room.roomId">{{room.roomNumber}} </option>
+          </select>
+        </div>
+
+        <div class="col-md-3">
+            <label for="buildingName">Tenant<span class="span">*</span></label>
+            <select id="buildingName" class="form-control" formControlName="tenantId">
+              <option *ngFor="let tenant of roomTenants" [value]="tenant.tenantId">{{tenant.firstName}} {{tenant.lastName}} </option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="remarks">Remarks</label>
+            <input type="text" class="form-control" id="remarks" placeholder="Remarks"
+               formControlName="remarks" />
+          </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3" style="text-align: center; width: 100%; margin-bottom: 10px">
+        Check Out
+      </button>
+   </form>
+
+</div>

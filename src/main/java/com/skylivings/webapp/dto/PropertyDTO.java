@@ -1,8 +1,10 @@
 package com.skylivings.webapp.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import com.skylivings.webapp.model.PropertyManager;
+import com.skylivings.webapp.model.Room;
 import com.skylivings.webapp.model.enums.PropertyStatus;
 import com.skylivings.webapp.model.enums.PropertyType;
 
@@ -13,7 +15,7 @@ public class PropertyDTO {
 	 private String propertyCode;
 	 private PropertyType propertyType;
 	 private String propertyName;
-	 private PropertyStatus propertyStatus;
+	 private String propertyStatus;
 	 private String buildingName;
 	 private String streetName;
 	 private String city;
@@ -28,5 +30,6 @@ public class PropertyDTO {
 	 private String alternativeContact;
 	 private String email;
 	 private String gender;
-	 private PropertyManager manager;
+	 private int managerId;
+	 private List<RoomDTO> rooms;
 }

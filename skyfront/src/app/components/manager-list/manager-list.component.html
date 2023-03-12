@@ -1,0 +1,26 @@
+<h2 style="text-align: center; margin-top: 10px;">Manager List</h2>
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr>
+            <th>Manager Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Contact</th>
+            <th>Alternative Contact</th>
+            <th>Email</th>
+            <th>Gender</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor = "let m of managers" >
+            <td> {{m.managerId}} </td>
+            <td> {{m.firstName}} </td>
+            <td> {{m.lastName}} </td>
+            <td> {{m.contact}} </td>
+            <td> {{m.alternativeContact}} </td>
+            <td> {{m.email}} </td>
+            <td> {{m.gender}} </td>
+        </tr>
+    </tbody>
+</table>

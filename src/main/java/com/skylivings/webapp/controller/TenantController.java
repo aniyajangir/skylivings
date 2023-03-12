@@ -28,8 +28,8 @@ public class TenantController {
 	}
 
 	@GetMapping("/tenant-list")
-	public List<TenantDTO> getTenants() {
-		List<TenantDTO> tenants = tenantService.getTenantPersonalDetails();
+	public List<Tenant> getTenants() {
+		List<Tenant> tenants = tenantService.getTenantPersonalDetails();
 		return tenants;
 	}
 	

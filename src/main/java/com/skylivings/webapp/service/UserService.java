@@ -38,7 +38,6 @@ public class UserService {
 	
 	
 	public void initRolesAndUser() {
-		System.out.println("Hiiii");
 		Role adminRole = new Role();
 		adminRole.setRoleName("Admin");
 		adminRole.setRoleDescription("By Default Admin");

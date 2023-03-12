@@ -1,7 +1,6 @@
 package com.skylivings.webapp.model;
 
-import java.util.Date;
-import java.util.List;
+import java.sql.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -25,7 +24,7 @@ import lombok.Data;
 public class Tenant {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private int tenantId;
 	private String firstName;
 	private String lastName;
 	private String contact;
@@ -36,7 +35,9 @@ public class Tenant {
 	@Enumerated(EnumType.STRING)
 	private TenantStatus tenantStatus;
 	private Date checkInDate;
-	private boolean headRoomMate;
+	private Date checkOutDate;
+	private String remarks;
+	private String headRoomMate;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "addressId")
 	private Address address;
@@ -44,10 +45,13 @@ public class Tenant {
 	@JoinColumn(name = "userId")
 	private User user;
 	@ManyToOne
+	@JoinColumn(name = "propertyId")
 	private Property property;
 	@ManyToOne
+	@JoinColumn(name = "roomId")
 	private Room room;
-	public boolean getHeadRoomMate() {
-		return this.headRoomMate;
-	}
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "tenantGovtDetails")
+	private TenantGovtDetails govtDetails;
+
 }

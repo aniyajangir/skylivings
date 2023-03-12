@@ -2,34 +2,34 @@
     Property Register
 </h5>
 <div class="card container md-5 mt-3">
-    <form (ngSubmit)= "onSubmit()">
+    <form [formGroup]="propertyForm" (ngSubmit)= "onSubmit()">
         <div class="row mt-3">
             <div class="col-md-6">
                 <label for="propertyCode">Property Code</label>
-                <input type="text" id="propertyCode" class="form-control" placeholder="Property ID" name="propertyCode"
-                    [(ngModel)]="property.propertyCode" required />
+                <input type="text" id="propertyCode" class="form-control" placeholder="Property ID" formControlName="propertyCode"
+                 />
             </div>
             <div class="col-md-6">
                 <label for="propertyName">Property Name</label>
                 <input type="text" id="propertyName" class="form-control" placeholder="Property Name"
-                    name="propertyName" [(ngModel)]="property.propertyName" required />
+                    formControlName="propertyName" />
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-md-3">
                 <label for="propertyType">Property Type</label>
                 <input type="text" id="propertyType" class="form-control" placeholder="1-BHK, 1-RK, Studio"
-                    name="propertyType" [(ngModel)]="property.propertyType" />
+                    formControlName="propertyType"/>
             </div>
             <div class="col-md-3">
                 <label for="propertyName">Property Onboarding Date</label>
                 <input type="date" id="propertyName" class="form-control" placeholder="Onboarding Date"
-                    name="OnboardingDate" [(ngModel)]="property.onBoardingDate" required />
+                    formControlName="OnboardingDate" />
             </div>
             <div class="col-md-6">
                 <label for="manager">Assign Manager <span class="span">*</span></label>
-                <select id="manager" name="manager" [(ngModel)]="property.manager" class="form-control">
-                    <option *ngFor="let manager of managers" [ngValue]="manager">
+                <select id="manager" formControlName="managerId" class="form-control">
+                    <option *ngFor="let manager of managers" [value]="manager.managerId">
                         {{ manager.firstName + " " + manager.lastName }}
                     </option>
                 </select>
@@ -43,32 +43,32 @@
         <div class="row mt-3">
             <div class="col">
                 <label for="buildingName">Building Name</label>
-                <input type="text" class="form-control" id="buildingName" placeholder="1234 Main St" name="buildingName"
-                    [(ngModel)]="property.buildingName" />
+                <input type="text" class="form-control" id="buildingName" placeholder="1234 Main St" formControlName="buildingName"
+                    />
             </div>
             <div class="col">
                 <label for="streetName">Street Name</label>
                 <input type="text" class="form-control" id="streetName" placeholder="Apartment, studio, or floor"
-                    name="streetName" [(ngModel)]="property.streetName" />
+                    formControlName="streetName"/>
             </div>
         </div>
         <div class="row mt-3">
             <div class="form-group col-md-4">
                 <label for="city">City <span class="span">*</span></label>
-                <input type="text" class="form-control" id="city" name="city" [(ngModel)] = "property.city" required />
+                <input type="text" class="form-control" id="city" formControlName="city"/>
             </div>
             <div class="form-group col-md-2">
                 <label for="state">State <span class="span">*</span></label>
-                <input type="text" class="form-control" id="state" name="city" [(ngModel)] = "property.state" required />
+                <input type="text" class="form-control" id="state" formControlName="state"/>
             </div>
             <div class="form-group col-md-4">
                 <label for="country">Country <span class="span">*</span></label>
-                <input type="text" class="form-control" id="country" name="country" [(ngModel)]="property.country" required />
+                <input type="text" class="form-control" id="country" formControlName="country"/>
             </div>
 
             <div class="form-group col-md-2">
                 <label for="inputZip">Zip <span class="span">*</span></label>
-                <input type="text" class="form-control" id="inputZip" name="zip" [(ngModel)]="property.zip" required />
+                <input type="text" class="form-control" id="inputZip" formControlName="zip"/>
             </div>
         </div>
         <h5>
@@ -79,13 +79,13 @@
         <div class="row mt-3">
             <div class="col">
               <label for="firstName">First Name <span class="span">*</span></label>
-              <input type="text" class="form-control" id="firstName" placeholder="First Name" [(ngModel)]="property.firstName"
-                name="firstName" required />
+              <input type="text" class="form-control" id="firstName" placeholder="First Name"
+                formControlName="firstName" required />
             </div>
             <div class="col">
               <label for="lastName">Last Name <span class="span">*</span></label>
-              <input type="text" class="form-control" id="lastName" placeholder="Last Name" [(ngModel)]="property.lastName"
-                name="lastName" required />
+              <input type="text" class="form-control" id="lastName" placeholder="Last Name"
+                formControlName="lastName" required />
             </div>
           </div>
       
@@ -95,16 +95,16 @@
               <label for="gender">Gender <span class="span">*</span></label>
               <div class="row" style="margin-left: 1px">
                   <div class="form-check col-md-2 form-check-inline">
-                      <input class="form-check-input" type="radio" id="MALE" name="gender" value="MALE" [(ngModel)]="property.gender">
+                      <input class="form-check-input" type="radio" id="MALE" formControlName="gender" value="MALE">
                       <label  class="form-check-label" for="MALE">MALE</label><br>
                   </div>
                   <div class="form-check col-md-2 form-check-inline">
-                      <input class="form-check-input" type="radio" id="FEMALE" name="gender" value="FEMALE" [(ngModel)]="property.gender">
+                      <input class="form-check-input" type="radio" id="FEMALE" formControlName="gender" value="FEMALE">
                       <label  class="form-check-label" for="FEMALE">FEMALE</label><br>
                   </div>
       
                   <div class="form-check col-md-2 form-check-inline">
-                      <input class="form-check-input" type="radio" id="OTHER" name="gender" value="OTHER" [(ngModel)]="property.gender">
+                      <input class="form-check-input" type="radio" id="OTHER" formControlName="gender" value="OTHER">
                       <label  class="form-check-label" for="OTHER">OTHER</label><br>
                   </div>
               </div>
@@ -114,25 +114,103 @@
             <div class="col-md-6">
               <label for="inputEmail4">Email <span class="span">*</span></label>
               <input type="email" class="form-control" id="inputEmail4" placeholder="Email"
-                pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" [(ngModel)]="property.email" name="email" required />
+                pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"formControlName="email" required />
             </div>
           </div>
       
           <div class="row mt-3">
             <div class="col">
               <label for="contact">Contact <span class="span">*</span></label>
-              <input type="text" class="form-control" id="contact" placeholder="Contact" [(ngModel)]="property.contact"
-                name="contact" required minlength="10" maxlength="15" />
+              <input type="text" class="form-control" id="contact" placeholder="Contact"
+              formControlName="contact" required minlength="10" maxlength="15" />
             </div>
       
             <div class="col">
               <label for="alternativeContact">Alternative Contact</label>
               <input type="text" class="form-control" id="alternativeContact" placeholder="Alternative Contact"
-                [(ngModel)]="property.alternativeContact" name="alternativeContact" />
+              formControlName="alternativeContact" />
             </div>
           </div>
-        <button type="submit" class="btn btn-primary mt-3" style="text-align: center; width: 100%; margin-bottom: 10px">
-            Register
-        </button>
+
+<div class="container card mt-3">
+    <div class="card-header mt-3">
+        <h5 style="text-align: center">Room / Flat Details</h5>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-3 mt-2">
+            <button type="button" class="btn btn-primary mt-3" (click)="addRoom()" style="text-align: center; margin-bottom: 10px">
+                Add Room / Flat
+            </button>
+        </div>
+    </div>
+    <div formArrayName="rooms" *ngFor="let room of rooms; let i = index">
+        <div formGroupName="{{i}}">
+
+        
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <label for="roomType">Type</label>
+                <input type="text" class="form-control" placeholder="Property Type" formControlName="roomType"/>
+            </div>
+            <div class="col">
+                <label for="roomNumber">Room Number</label>
+                <input type="text" class="form-control" placeholder="Room / Flat Number" formControlName="roomNumber"/>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-3">
+                <label for="roomNumber">Size (SqFt.)</label>
+                <input type="number" class="form-control" placeholder="Size of Room/Flat"  formControlName="roomSize"/>
+            </div>
+            <div class="col-md-3">
+                <label for="maxTenant">Capacity</label>
+                <input type="number" class="form-control" placeholder="Max Tenant Allowed" formControlName="capacity"/>
+            </div>
+            <div class="col-md-3">
+                <label for="bedroooms">Bedrooms</label>
+                <input type="number" class="form-control" placeholder="Number of Bedrooms"  formControlName="bedrooms"/>
+            </div>
+            <div class="col-md-3">
+                <label for="bathrooms">Bathrooms</label>
+                <input type="number" class="form-control" placeholder="Number of Bathrooms" formControlName="bathrooms"/>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-3">
+                <label for="rent">Rent</label>
+                <input type="number" class="form-control" placeholder="Rent Per Month" formControlName="rent" />
+            </div>
+            <div class="col-md-3">
+                <label for="deposit">Deposit</label>
+                <input type="number" class="form-control" placeholder="Security Deposit" formControlName="deposit" />
+            </div>
+            <div class="col-md-6">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" placeholder="Description" formControlName="description"/>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-3 mt-2">
+                <button type="button" class="btn btn-primary mt-3" (click)="addRoom()" style="text-align: center; margin-bottom: 10px">
+                    Add More
+                </button>
+            </div>
+        </div>
+    </div>
+
+        <div class="row mt-3">
+        </div>
+    </div>
+</div>
+          <div class="row mt-3">
+            
+            <div class="col">
+                <button type="submit" class="btn btn-primary mt-3" style="text-align: center; width: 100%; margin-bottom: 10px">
+                    Register 
+                </button> 
+            </div>
+          </div>
+        
     </form>
 </div>

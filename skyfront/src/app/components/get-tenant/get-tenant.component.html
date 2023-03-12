@@ -1,0 +1,249 @@
+<div class="container py-3 mt-3">
+  <h5 style="text-align: center">Enter Tenant ID</h5>
+  <input type="text" class="form-control mt-3" [(ngModel)]="tenantId" placeholder="Enter Tenant Id" />
+  <button class="btn btn-primary mt-3 mb-3" (click)="getTenantById(tenantId)">
+    Get Details
+  </button>
+
+  <div class="row mt-3" *ngIf="showTenant">
+    <div class="col-lg-4">
+      <div class="card mb-4">
+        <div class="card-body text-center">
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+            class="rounded-circle img-fluid" style="width: 150px" />
+          <h5 class="my-3">{{ tenant.firstName + " " + tenant.lastName }}</h5>
+
+          <div class="d-flex justify-content-center mb-2">
+            <button type="button" class="btn btn-success" *ngIf="tenant.tenantStatus === 'ACTIVE'">
+              {{ tenant.tenantStatus }}
+            </button>
+            <button type="button" class="btn btn-danger" *ngIf="tenant.tenantStatus === 'INACTIVE'">
+              {{ tenant.tenantStatus }}
+            </button>
+            <button type="button" class="btn btn-outline-primary ms-1" *ngIf="tenant.headRoomMate === 'YES'">
+                Head 
+            </button>
+          </div>
+          <div *ngIf="tenant.panNumber!= ''">
+          <div class="row my-3">
+            <div class="col-sm-5">
+              <p class="mb-0">Pan Number</p>
+            </div>
+            <div class="col-sm-7">
+              <p class="text-muted mb-0">{{ tenant.panNumber }}</p>
+            </div>
+          </div>
+          <hr/>
+          </div>
+          <div *ngIf="tenant.aadharNumber != ''">
+          <div class="row my-3">
+            <div class="col-sm-5">
+              <p class="mb-0">Aadhar Number</p>
+            </div>
+            <div class="col-sm-7">
+              <p class="text-muted mb-0">{{ tenant.aadharNumber }}</p>
+            </div>
+          </div>
+            <hr/>
+          </div>
+         
+        </div>
+      </div>
+
+      <div class="card mb-4 mb-lg-0">
+        <div class="card-body p-0">
+          <ul class="list-group list-group-flush rounded-3">
+            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+              <div class="col-sm-5">
+                <p class="mb-0">Property</p>
+              </div>
+              <div class="col-sm-7">
+                <p class="text-muted mb-0">
+                  {{ tenant.propertyName }}
+                </p>
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+              <div class="col-sm-5">
+                <p class="mb-0">Room Number</p>
+              </div>
+              <div class="col-sm-7">
+                <p class="text-muted mb-0">
+                  {{ tenant.roomNumber }}
+                </p>
+              </div>
+            </li>
+           
+            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+              <div class="col-sm-5">
+                <p class="mb-0">Rent</p>
+              </div>
+              <div class="col-sm-7">
+                <p class="text-muted mb-0">
+                  {{ tenant.room.rent }}
+                </p>
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+              <div class="col-sm-5">
+                <p class="mb-0">Deposit</p>
+              </div>
+              <div class="col-sm-7">
+                <p class="text-muted mb-0">
+                  {{ tenant.room.deposit }}
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-lg-8">
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Full Name</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">
+                {{ tenant.firstName + " " + tenant.lastName }}
+              </p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Email</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{ tenant.email }}</p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Contact</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{ tenant.contact }}</p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Contact Home</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{ tenant.alternativeContact }}</p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Check-In Date</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">
+                {{ tenant.checkInDate }} (YYYY/MM/DD)
+              </p>
+            </div>
+          </div>
+          <div></div>
+          <hr *ngIf="tenant.tenantStatus === 'INACTIVE'" />
+          <div class="row" *ngIf="tenant.tenantStatus === 'INACTIVE'">
+            <div class="col-sm-3">
+              <p class="mb-0">Check-Out Date</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">
+                {{ tenant.checkOutDate }} (YYYY/MM/DD)
+              </p>
+            </div>
+          </div>
+          <!-- <hr *ngIf="tenant.tenantStatus === 'INACTIVE'" />
+          <div class="row" *ngIf="tenant.tenantStatus === 'INACTIVE'">
+            <div class="col-sm-3">
+              <p class="mb-0">Check-Out Date</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">
+                {{ tenant.checkOutDate }} (YYYY/MM/DD)
+              </p>
+            </div>
+          </div> -->
+          <hr />
+
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Address</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">
+                {{
+                tenant.address.city +
+                ", " +
+                tenant.address.state +
+                ", " +
+                tenant.address.country
+                }}
+              </p>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <div class="row">
+        <div class="col-md-12" *ngFor="let r of roommates" >
+          <div class="mb-2" *ngIf="r.tenantId != tenantId && r.tenantStatus != 'INACTIVE' && tenant.tenantStatus =='ACTIVE' ">
+          <div class="card mb-md-0">
+            <div class="card-body ">
+              <p class="mb-0"><span class="text-primary font-italic me-3">Roommate</span>  {{r.firstName+" "+r.lastName }}
+              </p>
+              <hr />
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Contact</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">
+                    {{ r.contact }}
+                  </p>
+                </div>
+            </div>
+            <hr />
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Address</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">
+                    {{
+                      r.address.city +
+                      ", " +
+                      r.address.state +
+                      ", " +
+                      r.address.country
+                      }}
+                  </p>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+        <!-- <div class="col-md-6">
+          <div class="card mb-4 mb-md-0">
+            <div class="card-body">
+              <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
+              </p>
+            </div>
+          </div>
+        </div>
+        </div> -->
+        
+      </div>
+    </div>
+</div>

@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
+import com.skylivings.webapp.dto.RoomDTO;
 import com.skylivings.webapp.model.enums.PropertyStatus;
 import com.skylivings.webapp.model.enums.PropertyType;
 
@@ -22,6 +24,7 @@ import lombok.Data;
 
 @Data
 @Entity
+@JsonIgnoreType
 public class Property {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +41,7 @@ public class Property {
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "managerId")
 	private PropertyManager manager;
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Room> rooms;
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ownerId")

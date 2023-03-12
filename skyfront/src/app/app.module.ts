@@ -12,11 +12,15 @@ import { NewPropertyComponent } from './components/new-property/new-property.com
 import { AddressComponent } from './components/address/address.component';
 import { DynamicInputComponent } from './components/dynamic-input/dynamic-input.component';
 import { HomeComponent } from './components/home/home.component';
-import { NewRoomBookingComponent } from './new-room-booking/new-room-booking.component';
 import { PropertyTenantsComponent } from './components/property-tenants/property-tenants.component';
 import { NgFor } from '@angular/common';
 import { NewManagerComponent } from './components/new-manager/new-manager.component';
 import { NewRoomComponent } from './components/new-room/new-room.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ManagerListComponent } from './components/manager-list/manager-list.component';
+import { CheckoutTenantComponent } from './components/checkout-tenant/checkout-tenant.component';
+import { ActiveTenantsComponent } from './components/active-tenants/active-tenants.component';
+import { GetTenantComponent } from './components/get-tenant/get-tenant.component';
 
 
 
@@ -30,10 +34,14 @@ import { NewRoomComponent } from './components/new-room/new-room.component';
     AddressComponent,
     DynamicInputComponent,
     HomeComponent,
-    NewRoomBookingComponent,
     PropertyTenantsComponent,
     NewManagerComponent,
     NewRoomComponent,
+    ManagerListComponent,
+    CheckoutTenantComponent,
+    ActiveTenantsComponent,
+    GetTenantComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -41,6 +49,7 @@ import { NewRoomComponent } from './components/new-room/new-room.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
