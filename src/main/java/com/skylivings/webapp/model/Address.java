@@ -12,6 +12,7 @@ import lombok.Data;
 public class Address {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//This is address IDss
 	private long addressId;
 	private String flatNumber;
 	private String streetName;
